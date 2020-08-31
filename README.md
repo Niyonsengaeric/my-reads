@@ -1,6 +1,30 @@
 # My Reads
 
-This project is for managing my reads
+My Reads is the application that manage my Reads books.
+
+### Goal of Application
+
+The Goal of this Application is to track my readings state (Currently Reading, Want to Read, Read )
+
+# **Technologies used**
+
+- **react JS** -  An open-source JavaScript library for building user interfaces or UI components.
+
+# **Requirements and Installation steps**
+
+## **You need the following to be able to run the application**
+
+[Node](https://nodejs.org/en/download/) a runtime environment for JavaScript.
+
+[Yarn](https://classic.yarnpkg.com/en/) or [npm](https://www.npmjs.com/get-npm) is a package manager for the JavaScript programming language.
+
+[Visual studio code](https://code.visualstudio.com/download) for editing and running the app.
+
+## **Clone the project**
+    - open the terminal
+    - run git clone https://github.com/Niyonsengaeric/my-reads.git
+    - run cd /my-reads
+    - run yarn install (to install required dependencies)
 
 ## Available Scripts
 
@@ -15,3 +39,7 @@ For install dependencies
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+# **Author**
+
+[NIYONSENGA ERIC](https://github.com/Niyonsengaeric)
