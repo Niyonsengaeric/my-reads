@@ -25,7 +25,7 @@ class Reads extends React.Component {
                             height: 193,
                             backgroundImage: `url(${
                               book.imageLinks.smallThumbnail
-                            })`,
+                              })`,
                           }}
                         />
                         <div className="book-shelf-changer">
@@ -50,8 +50,8 @@ class Reads extends React.Component {
                       <div className="book-authors">
                         {Array.isArray(book.authors)
                           ? book.authors.map((author, index) => {
-                              return (index ? ", " : "") + `${author} `;
-                            })
+                            return (index ? ", " : "") + `${author} `;
+                          })
                           : book.authors}
                       </div>
                     </div>

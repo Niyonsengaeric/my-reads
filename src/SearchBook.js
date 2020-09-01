@@ -138,8 +138,8 @@ class SearchBook extends React.Component {
                             <div className="book-authors">
                               {Array.isArray(book.authors)
                                 ? book.authors.map((author, index) => {
-                                    return (index ? ", " : "") + `${author} `;
-                                  })
+                                  return (index ? ", " : "") + `${author} `;
+                                })
                                 : book.authors}
                               <div className="book-title">{book.shelf}</div>
                             </div>
