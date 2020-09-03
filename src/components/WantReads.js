@@ -36,7 +36,7 @@ class WantReads extends React.Component {
                             <option value="currentlyReading">
                               Currently Reading
                             </option>
-                            <option value="wantToRead" className="selected">
+                            <option value="wantToRead" className="selected" selected ="selected">
                               Want to Read
                             </option>
                             <option value="read">Read</option>

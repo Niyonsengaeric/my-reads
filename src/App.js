@@ -47,7 +47,7 @@ class BooksApp extends React.Component {
     this.getBooksState();
   }
   render() {
-    const { currentlyReading, wantToRead, read } = this.state;
+    const { currentlyReading, wantToRead, read,books } = this.state;
     return (
       <div className="app">
         <Route
@@ -55,7 +55,10 @@ class BooksApp extends React.Component {
           render={({ history }) => (
             <SearchBook
               onChangeBookState={this.changeBookState}
-              booksState={this.state}
+              currentlyReading={currentlyReading}
+              wantToRead={wantToRead}
+              read={read}
+              books={books}
               goBack={() => {
                 history.push("/");
               }}

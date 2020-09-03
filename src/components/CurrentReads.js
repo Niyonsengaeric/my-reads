@@ -37,6 +37,7 @@ class CurrentReads extends React.Component {
                             <option
                               value="currentlyReading"
                               className="selected"
+                              selected ="selected"
                             >
                               Currently Reading
                             </option>
