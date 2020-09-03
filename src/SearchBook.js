@@ -6,6 +6,7 @@ class SearchBook extends React.Component {
   state = {
     books: [],
     query: "",
+    booksList:[],
     currentlyReading: [],
     read: [],
     wantToRead: [],
@@ -28,24 +29,26 @@ class SearchBook extends React.Component {
   }
 
   async getBooksState() {
-    const { currentlyReading, read, wantToRead } = await this.props.booksState;
+    const { currentlyReading, read, wantToRead,books } = await this.props;
 
     this.setState(() => ({
       currentlyReading: currentlyReading,
       read: read,
       wantToRead: wantToRead,
+      booksList: books
     }));
   }
   async componentDidMount() {
     this.getBooksState();
   }
   async componentDidUpdate(prevProps, prevState) {
-    if (prevProps.booksState !== this.props.booksState) {
+    if (prevProps !== this.props) {
       this.getBooksState();
     }
   }
   render() {
-    const { currentlyReading, read, wantToRead } = this.state;
+
+    const { currentlyReading, read, wantToRead, booksList} = this.state;
     const { books } = this.state;
     const { onChangeBookState } = this.props;
     return (
@@ -94,12 +97,26 @@ class SearchBook extends React.Component {
                                           element.shelf === "currentlyReading"
                                       ) && "selected"
                                     }
+                                    selected={
+                                      currentlyReading.find(
+                                        (element) =>
+                                          element.id === book.id &&
+                                          element.shelf === "currentlyReading"
+                                      ) && "selected"
+                                    }
                                   >
                                     Currently Reading
                                   </option>
                                   <option
                                     value="wantToRead"
                                     className={
+                                      wantToRead.find(
+                                        (element) =>
+                                          element.id === book.id &&
+                                          element.shelf === "wantToRead"
+                                      ) && "selected"
+                                    }
+                                    selected={
                                       wantToRead.find(
                                         (element) =>
                                           element.id === book.id &&
@@ -118,13 +135,20 @@ class SearchBook extends React.Component {
                                           element.shelf === "read"
                                       ) && "selected"
                                     }
+                                    selected={
+                                      read.find(
+                                        (element) =>
+                                          element.id === book.id &&
+                                          element.shelf === "read"
+                                      ) && "selected"
+                                    }
                                   >
                                     Read
                                   </option>
                                   <option
                                     value="none"
                                     className={
-                                      read.find(
+                                      booksList.find(
                                         (element) => element.id === book.id
                                       ) || "selected"
                                     }
@@ -162,7 +186,10 @@ class SearchBook extends React.Component {
 }
 
 SearchBook.propTypes = {
-  booksState: PropTypes.object.isRequired,
+  currentlyReading: PropTypes.array.isRequired,
+  read: PropTypes.array.isRequired,
+  wantToRead: PropTypes.array.isRequired,
+  books: PropTypes.array.isRequired,
   onChangeBookState: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
 };
