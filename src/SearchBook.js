@@ -6,7 +6,7 @@ class SearchBook extends React.Component {
   state = {
     books: [],
     query: "",
-    booksList:[],
+    booksList: [],
     currentlyReading: [],
     read: [],
     wantToRead: [],
@@ -29,13 +29,13 @@ class SearchBook extends React.Component {
   }
 
   async getBooksState() {
-    const { currentlyReading, read, wantToRead,books } = await this.props;
+    const { currentlyReading, read, wantToRead, books } = await this.props;
 
     this.setState(() => ({
       currentlyReading: currentlyReading,
       read: read,
       wantToRead: wantToRead,
-      booksList: books
+      booksList: books,
     }));
   }
   async componentDidMount() {
@@ -47,8 +47,7 @@ class SearchBook extends React.Component {
     }
   }
   render() {
-
-    const { currentlyReading, read, wantToRead, booksList} = this.state;
+    const { currentlyReading, read, wantToRead, booksList } = this.state;
     const { books } = this.state;
     const { onChangeBookState } = this.props;
     return (
@@ -86,18 +85,32 @@ class SearchBook extends React.Component {
                                   onChange={(e) =>
                                     onChangeBookState(book.id, e.target.value)
                                   }
+                                  value={
+                                    booksList.find(
+                                      (element) =>
+                                        element.id === book.id &&
+                                        element.shelf === "currentlyReading"
+                                    )
+                                      ? "currentlyReading"
+                                      : booksList.find(
+                                          (element) =>
+                                            element.id === book.id &&
+                                            element.shelf === "wantToRead"
+                                        )
+                                      ? "wantToRead"
+                                      : booksList.find(
+                                          (element) =>
+                                            element.id === book.id &&
+                                            element.shelf === "read"
+                                        )
+                                      ? "read"
+                                      : "none"
+                                  }
                                 >
                                   <option value="move">Move to...</option>
                                   <option
                                     value="currentlyReading"
                                     className={
-                                      currentlyReading.find(
-                                        (element) =>
-                                          element.id === book.id &&
-                                          element.shelf === "currentlyReading"
-                                      ) && "selected"
-                                    }
-                                    selected={
                                       currentlyReading.find(
                                         (element) =>
                                           element.id === book.id &&
@@ -116,26 +129,12 @@ class SearchBook extends React.Component {
                                           element.shelf === "wantToRead"
                                       ) && "selected"
                                     }
-                                    selected={
-                                      wantToRead.find(
-                                        (element) =>
-                                          element.id === book.id &&
-                                          element.shelf === "wantToRead"
-                                      ) && "selected"
-                                    }
                                   >
                                     Want to Read
                                   </option>
                                   <option
                                     value="read"
                                     className={
-                                      read.find(
-                                        (element) =>
-                                          element.id === book.id &&
-                                          element.shelf === "read"
-                                      ) && "selected"
-                                    }
-                                    selected={
                                       read.find(
                                         (element) =>
                                           element.id === book.id &&
@@ -162,8 +161,8 @@ class SearchBook extends React.Component {
                             <div className="book-authors">
                               {Array.isArray(book.authors)
                                 ? book.authors.map((author, index) => {
-                                  return (index ? ", " : "") + `${author} `;
-                                })
+                                    return (index ? ", " : "") + `${author} `;
+                                  })
                                 : book.authors}
                               <div className="book-title">{book.shelf}</div>
                             </div>

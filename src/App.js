@@ -1,9 +1,7 @@
 import React from "react";
 import * as BooksAPI from "./BooksAPI";
 import "./App.css";
-import WantReads from "./components/WantReads";
-import CurrentReads from "./components/CurrentReads";
-import Reads from "./components/Reads";
+import MyReads from "./components/MyReads";
 import SearchBook from "./SearchBook";
 import { Route } from "react-router-dom";
 
@@ -47,7 +45,7 @@ class BooksApp extends React.Component {
     this.getBooksState();
   }
   render() {
-    const { currentlyReading, wantToRead, read,books } = this.state;
+    const { currentlyReading, wantToRead, read, books } = this.state;
     return (
       <div className="app">
         <Route
@@ -75,15 +73,21 @@ class BooksApp extends React.Component {
               </div>
               <div className="list-books-content">
                 <div>
-                  <CurrentReads
+                  <MyReads
                     currentlyReading={currentlyReading}
                     onChangeBookState={this.changeBookState}
+                    status="currentlyReading"
                   />
-                  <WantReads
-                    wantToRead={wantToRead}
+                  <MyReads
+                    currentlyReading={wantToRead}
                     onChangeBookState={this.changeBookState}
+                    status="wantToRead"
                   />
-                  <Reads read={read} onChangeBookState={this.changeBookState} />
+                  <MyReads
+                    currentlyReading={read}
+                    onChangeBookState={this.changeBookState}
+                    status="read"
+                  />
                 </div>
               </div>
               <div className="open-search">
