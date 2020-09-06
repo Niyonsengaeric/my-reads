@@ -5,11 +5,17 @@ class CurrentReads extends React.Component {
   state = {};
 
   render() {
-    const { currentlyReading, onChangeBookState } = this.props;
+    const { currentlyReading, onChangeBookState, status } = this.props;
     return (
       <div>
         <div className="bookshelf">
-          <h2 className="bookshelf-title">Currently Reading</h2>
+          <h2 className="bookshelf-title">
+            {status === "currentlyReading"
+              ? "Currently Reading"
+              : status === "wantToRead"
+              ? "Want to Read"
+              : "Read"}
+          </h2>
           <div className="bookshelf-books">
             {currentlyReading.length !== 0 && (
               <ol className="books-grid">
@@ -24,7 +30,7 @@ class CurrentReads extends React.Component {
                             height: 193,
                             backgroundImage: `url(${
                               book.imageLinks.smallThumbnail
-                              })`,
+                            })`,
                           }}
                         />
                         <div className="book-shelf-changer">
@@ -32,17 +38,31 @@ class CurrentReads extends React.Component {
                             onChange={(e) =>
                               onChangeBookState(book.id, e.target.value)
                             }
+                            value={status}
                           >
                             <option value="move">Move to...</option>
                             <option
                               value="currentlyReading"
-                              className="selected"
-                              selected ="selected"
+                              className={
+                                status === "currentlyReading" ? "selected" : ""
+                              }
                             >
                               Currently Reading
                             </option>
-                            <option value="wantToRead">Want to Read</option>
-                            <option value="read">Read</option>
+                            <option
+                              value="wantToRead"
+                              className={
+                                status === "wantToRead" ? "selected" : ""
+                              }
+                            >
+                              Want to Read
+                            </option>
+                            <option
+                              value="read"
+                              className={status === "read" ? "selected" : ""}
+                            >
+                              Read
+                            </option>
                             <option value="none">None</option>
                           </select>
                         </div>
@@ -51,8 +71,8 @@ class CurrentReads extends React.Component {
                       <div className="book-authors">
                         {Array.isArray(book.authors)
                           ? book.authors.map((author, index) => {
-                            return (index ? ", " : "") + `${author} `;
-                          })
+                              return (index ? ", " : "") + `${author} `;
+                            })
                           : book.authors}
                       </div>
                     </div>
